@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins&display=swap');
+
+$primaryColor: rgb(255, 77, 0);
+$secondaryColor: rgb(250, 217, 4);
+
+html, body {
+  background: linear-gradient(to right top, $primaryColor, $secondaryColor);
+  height: 100%;
+  font-family: Lato;
+  color: white;
+}
