@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import TaskListModel from './models/taskListModel';
+import TaskModel from './models/taskModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,16 @@ export class ApiConfigService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get(url: string): Observable<TaskListModel[]> {
+  getTaskLists(url: string): Observable<TaskListModel[]> {
     return this.httpClient.get<TaskListModel[]>(`${this.API_BASE_URL}/${url}`);
   }
 
+  getTasks(url: string): Observable<TaskModel[]> {
+    return this.httpClient.get<TaskModel[]>(`${this.API_BASE_URL}/${url}`);
+  }
+
   post(url: string, data: object) {
-    return this.httpClient.post(`${this.API_BASE_URL}/${url}`, data);
+    return this.httpClient.post<TaskListModel>(`${this.API_BASE_URL}/${url}`, data);
   }
 
   put(url: string, data: object) {
@@ -28,7 +33,11 @@ export class ApiConfigService {
     return this.httpClient.patch(`${this.API_BASE_URL}/${url}`, data);
   }
 
-  delete(url: string) {
-    return this.httpClient.get(`${this.API_BASE_URL}/${url}`);
+  deleteTask(url: string) {
+    return this.httpClient.delete<TaskModel>(`${this.API_BASE_URL}/${url}`);
+  }
+
+  deleteTaskList(url: string) {
+    return this.httpClient.delete<TaskListModel>(`${this.API_BASE_URL}/${url}`);
   }
 }

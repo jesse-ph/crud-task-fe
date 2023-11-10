@@ -13,11 +13,15 @@ export class TaskService {
 
   // to fetch all task lists
   getAllTaskLists(): Observable<TaskListModel[]> {
-    return this.apiConfigService.get('tasklists');
+    return this.apiConfigService.getTaskLists('tasklists');
+  }
+
+  getAllTasks(taskListId: string): Observable<TaskModel[]> {
+    return this.apiConfigService.getTasks(`tasklists/${taskListId}`);
   }
 
   //create a task list bucket
-  createTaskList(title: string) {
+  createTaskList(title: string): Observable<TaskListModel> {
     const data = {
       'title': title
     };
@@ -27,23 +31,23 @@ export class TaskService {
 
   //fetch all tasks inside a task list object
   getAllTasksForATaskList(taskListId: string) {
-    return this.apiConfigService.get(`tasklists/${taskListId}/tasks`);
+    return this.apiConfigService.getTasks(`tasklists/${taskListId}/tasks`);
   }
 
   //create a task inside a particular task list object
   createTaskInsideATaskList(taskListId: string, title: string) {
 
-    this.apiConfigService.post(`tasklists/${taskListId}/tasks`, { title });
+    return this.apiConfigService.post(`tasklists/${taskListId}/tasks`, { title });
   }
 
   //delete a task list
-  deleteTaskList(taskListId: string) {
-    return this.apiConfigService.delete(`tasklists/${taskListId}`);
+  deleteTaskList(taskListId: string): Observable<TaskListModel> {
+    return this.apiConfigService.deleteTaskList(`tasklists/${taskListId}`);
   }
 
   //delete a task inside a task list
-  deleteATaskInsideTaskList(taskListId: string, taskId: string) {
-    return this.apiConfigService.delete(`tasklists/${taskListId}/tasks/${taskId}`);
+  deleteATaskInsideTaskList(taskListId: string, taskId: string): Observable<TaskModel> {
+    return this.apiConfigService.deleteTask(`tasklists/${taskListId}/tasks/${taskId}`);
   }
 
   updateTaskStatus(taskListId: string, taskObject: TaskModel) {
