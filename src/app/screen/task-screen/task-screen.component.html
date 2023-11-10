@@ -1,0 +1,55 @@
+<div class="container mt-4">
+  <h2 class="bg-danger p-4 fw-bold text-center jesse-eclevia">Task Manager App</h2>
+  <div class="row">
+    <div class="col-md-4 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="fw-bold float-start">Tasks List</h3>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-success float-end" routerLink="/new-task-list">New Task List</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="list-group">
+            <a
+              [routerLink]="['/task-list', item._id]"
+              routerLinkActive="active"
+              *ngFor="let item of tasksLists"
+              class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            >
+              <span>{{ item.title }}</span>
+              <span class="badge bg-danger rounded-pill" aria-hidden="true" (click)="deleteTaskList(item)">&#x2715;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="fw-bold float-start">Linked Tasks</h3>
+        </div>
+        <div class="col-6">
+          <button type="button" class="btn btn-success float-end" (click)="addNewTask()">New Task</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ul class="list-group tasks-group">
+            <li
+              aria-hidden="true"
+              *ngFor="let task of tasks"
+              (click)="onTaskClick(task)"
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <span [class.mark-completed]="task.completed">{{ task.title }}</span>
+              <span class="badge bg-danger rounded-pill" (click)="deleteTask(task)">&#x2715;</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

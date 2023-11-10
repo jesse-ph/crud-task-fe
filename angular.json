@@ -59,6 +59,14 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
@@ -70,7 +78,11 @@
           "configurations": {
             "production": {
               "browserTarget": "crud-task-fe:build:production"
-            }
+            },
+            "development": {
+              "browserTarget": "crud-task-fe:build:development"
+            },
+            "defaultConfiguration": "development"
           }
         },
         "extract-i18n": {
